@@ -1,8 +1,7 @@
 from typing import Callable
 
-from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QLineEdit, QMessageBox, QPushButton, QHBoxLayout, QWidget
-from ui.loginRegisterBase import LoginRegisterBase
+from ui.loginRegisterPanel.loginRegisterBase import LoginRegisterBase
 
 from service.authService import AuthService
 from service.authError import AuthError
@@ -19,7 +18,7 @@ class RegisterPage(LoginRegisterBase):
         self.init_register_button()
         self.init_login_button()
 
-    def _register(self) -> None:
+    def register_user(self) -> None:
         username = self.username_input.text()
         password = self.password_input.text()
         try:
@@ -52,7 +51,7 @@ class RegisterPage(LoginRegisterBase):
     def init_register_button(self):
         self.btn_layout.setContentsMargins(0, 0, 0, 0)
         self.register_button = QPushButton("Register")
-        self.register_button.clicked.connect(self._register)
+        self.register_button.clicked.connect(self.register_user)
         self.btn_layout.addWidget(self.register_button)
     
     def init_login_button(self):

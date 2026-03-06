@@ -1,17 +1,15 @@
 from typing import Callable
 
-from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QLineEdit,
     QMessageBox,
     QPushButton,
     QHBoxLayout, QWidget
 )
-from ui.loginRegisterBase import LoginRegisterBase
+from ui.loginRegisterPanel.loginRegisterBase import LoginRegisterBase
 
 from models.user import User
 from service.authService import AuthError, AuthService
-
 
 class LoginPage(LoginRegisterBase):
     def __init__(
@@ -30,7 +28,7 @@ class LoginPage(LoginRegisterBase):
         self.init_register_button()
         self.init_buttons_container()
 
-    def _login(self) -> None:
+    def login_user(self) -> None:
         username = self.username_input.text()
         password = self.password_input.text()
         try:
@@ -45,19 +43,19 @@ class LoginPage(LoginRegisterBase):
     def init_username_input(self):
         self.username_input = QLineEdit()
         self.username_input.setPlaceholderText("Username")
-        self.username_input.returnPressed.connect(self._login)
+        self.username_input.returnPressed.connect(self.login_user)
         self.card_layout.addWidget(self.username_input)
 
     def init_password_input(self):
         self.password_input = QLineEdit()
         self.password_input.setEchoMode(QLineEdit.EchoMode.Password)
         self.password_input.setPlaceholderText("Password")
-        self.password_input.returnPressed.connect(self._login)
+        self.password_input.returnPressed.connect(self.login_user)
         self.card_layout.addWidget(self.password_input)
 
     def init_login_button(self):
         self.login_button = QPushButton("Login")
-        self.login_button.clicked.connect(self._login)
+        self.login_button.clicked.connect(self.login_user)
 
     def init_register_button(self):
         self.register_button = QPushButton("Register")

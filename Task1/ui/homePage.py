@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QMainWindow, QStackedWidget
-from ui.loginPage import LoginPage
-from ui.registerPage import RegisterPage
+from ui.loginRegisterPanel.loginPage import LoginPage
+from ui.loginRegisterPanel.registerPage import RegisterPage
 from service.authService import AuthService
 from models.user import User
 
@@ -35,7 +35,6 @@ class HomePage(QMainWindow):
 
         self.stack.addWidget(self.login_page)
         self.stack.addWidget(self.register_page)
-        
     def show_login(self) -> None:
         self.stack.setCurrentWidget(self.login_page)
 
