@@ -2,20 +2,25 @@ from PySide6.QtWidgets import QMainWindow, QStackedWidget
 from ui.loginRegisterPanel.loginPage import LoginPage
 from ui.loginRegisterPanel.registerPage import RegisterPage
 from service.authService import AuthService
+from service.userPanelService import UserPanelService
 from models.user import User
+from ui.userPanel.user.userPanel import UserPanel
+
 
 class HomePage(QMainWindow):
     def __init__(self) -> None:
         super().__init__()
         self.setWindowTitle("Library Management System")
         self.resize(980, 640)
+        self.user_panel: UserPanel | None = None
         self.init_service()
         self.init_page()
         self.init_stack()
         self.show_login()
-    
+
     def init_service(self):
         self.auth_service = AuthService()
+        self.user_service = UserPanelService()
 
     def init_page(self):
         self.login_page = LoginPage(
@@ -32,9 +37,9 @@ class HomePage(QMainWindow):
         self.stack = QStackedWidget()
         self.stack.setObjectName("appRoot")
         self.setCentralWidget(self.stack)
-
         self.stack.addWidget(self.login_page)
         self.stack.addWidget(self.register_page)
+
     def show_login(self) -> None:
         self.stack.setCurrentWidget(self.login_page)
 
@@ -42,7 +47,19 @@ class HomePage(QMainWindow):
         self.stack.setCurrentWidget(self.register_page)
 
     def show_user_panel(self, user: User) -> None:
-        return 
+        if user.role == "admin":
+            return
+        if self.user_panel is not None:
+            self.stack.removeWidget(self.user_panel)
+            self.user_panel.deleteLater()
+        self.user_panel = UserPanel(
+            username=user.username,
+            user_service=self.user_service,
+            on_logout=self.show_login,
+        )
+        self.stack.addWidget(self.user_panel)
+        self.stack.setCurrentWidget(self.user_panel)
+
 
 
 
