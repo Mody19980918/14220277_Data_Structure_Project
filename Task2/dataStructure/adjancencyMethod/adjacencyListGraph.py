@@ -1,7 +1,7 @@
-from Data_Structure.GraphADT import GraphADT
-from Data_Structure.GraphType.GraphType import GraphType
+from dataStructure.graphADT import GraphADT
+from dataStructure.graphType.GraphType import GraphType
 from typing import Dict, List, Tuple
-from Data_Structure.Edge import Edge
+from dataStructure.edge import Edge
 
 DIVIDER="="*50
 
@@ -26,6 +26,13 @@ class AdjacencyListGraph(GraphADT):
         self.adjacency_list: Dict[int, List[Tuple[int, float]]] = {
             i: [] for i in range(num_vertices)
         }
+
+    def add_vertex(self) -> int:
+        """add a new vertex and return its index"""
+        new_vertex_id = self.num_vertices
+        self.adjacency_list[new_vertex_id] = []
+        self.num_vertices += 1
+        return new_vertex_id
 
     def add_edge(self, u: int, v: int, weight: float = 1.0) -> None:
         """add edge to adjacency list"""

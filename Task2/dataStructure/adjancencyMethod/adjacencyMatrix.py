@@ -1,7 +1,7 @@
-from Data_Structure.GraphADT import GraphADT
-from Data_Structure.GraphType.GraphType import GraphType
+from dataStructure.graphADT import GraphADT
+from dataStructure.graphType.GraphType import GraphType
 from typing import Optional, List, Tuple
-from Data_Structure.Edge import Edge
+from dataStructure.edge import Edge
 
 DIVIDER = "="*50
 
@@ -24,6 +24,17 @@ class AdjacencyMatrixGraph(GraphADT):
         self.matrix: List[List[float]] = [
             [0.0] * num_vertices for _ in range(num_vertices)
         ]
+
+    def add_vertex(self) -> int:
+        """add a new vertex and return its index"""
+        new_vertex_id = self.num_vertices
+        # add new column to each existing row
+        for row in self.matrix:
+            row.append(0.0)
+        # add new row for the new vertex
+        self.matrix.append([0.0] * (self.num_vertices + 1))
+        self.num_vertices += 1
+        return new_vertex_id
 
     def add_edge(self, u: int, v: int, weight: float = 1.0) -> None:
         """add edge to adjacency matrix"""

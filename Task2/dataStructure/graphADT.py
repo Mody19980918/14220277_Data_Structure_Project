@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import List, Tuple
-from Data_Structure.GraphType.GraphType import GraphType
+from dataStructure.graphType.GraphType import GraphType
 
 class GraphADT(ABC):
     """Abstract Data Type of Graph (ADT)"""
@@ -8,6 +8,11 @@ class GraphADT(ABC):
     def __init__(self, num_vertices: int, graph_type: GraphType = GraphType.UNDIRECTED):
         self.num_vertices = num_vertices
         self.graph_type = graph_type
+
+    @abstractmethod
+    def add_vertex(self) -> int:
+        """add a new vertex and return its index"""
+        pass
 
     @abstractmethod
     def add_edge(self, u: int, v: int, weight: float = 1.0) -> None:

@@ -1,5 +1,5 @@
-from Data_Structure.GraphType.UndirectedGraph import UndirectedGraph
-from Data_Structure.GraphType.DirectedGraph import DirectedGraph
+from dataStructure.graphType.UndirectedGraph import UndirectedGraph
+from dataStructure.graphType.DirectedGraph import DirectedGraph
 
 DIVIDER = "=" * 60
 
@@ -12,7 +12,6 @@ def main():
     2. the internal data structure of the graph
     3. the graph information
     4. the graph operation demo
-    5. the graph operation demo
     """
     print(DIVIDER)
     print("       Graph Data Structure (Graph Data Structure) Demo")
@@ -147,9 +146,58 @@ def main():
     print(f"  edge (1 -> 0) exists? {directed_matrix.has_edge(1, 0)}")
     print(f"  vertex 3 neighbors: {directed_matrix.get_neighbors(3)}")
 
+    # ==================== add vertex demo ====================
+    print("\n" + DIVIDER)
+    print("【5】add vertex demo (add vertex dynamically)")
+    print(DIVIDER)
+
+    # demo for adjacency list
+    dynamic_graph_list = UndirectedGraph(num_vertices=3, use_matrix=False)
+    dynamic_graph_list.add_edge(0, 1)
+    dynamic_graph_list.add_edge(1, 2)
+
+    print("\ninitial graph (3 vertices):")
+    dynamic_graph_list.display()
+
+    # add new vertices
+    new_vertex_1 = dynamic_graph_list.add_vertex()
+    print(f"\nadded new vertex: {new_vertex_1}")
+
+    new_vertex_2 = dynamic_graph_list.add_vertex()
+    print(f"added new vertex: {new_vertex_2}")
+
+    # add edges to new vertices
+    dynamic_graph_list.add_edge(0, new_vertex_1)
+    dynamic_graph_list.add_edge(new_vertex_1, new_vertex_2)
+    dynamic_graph_list.add_edge(2, new_vertex_2)
+
+    print("\nafter adding 2 new vertices and edges:")
+    dynamic_graph_list.display()
+    print(f"\nnow total vertices: {dynamic_graph_list.num_vertices}")
+
+    # demo for adjacency matrix
+    print("\n" + "-" * 40)
+    print("adjacency matrix version:")
+    print("-" * 40)
+
+    dynamic_graph_matrix = UndirectedGraph(num_vertices=3, use_matrix=True)
+    dynamic_graph_matrix.add_edge(0, 1)
+    dynamic_graph_matrix.add_edge(1, 2)
+
+    print("\ninitial graph (3 vertices):")
+    dynamic_graph_matrix.display()
+
+    new_vertex_3 = dynamic_graph_matrix.add_vertex()
+    print(f"\nadded new vertex: {new_vertex_3}")
+    dynamic_graph_matrix.add_edge(0, new_vertex_3)
+
+    print("\nafter adding new vertex and edge:")
+    dynamic_graph_matrix.display()
+    print(f"\nnow total vertices: {dynamic_graph_matrix.num_vertices}")
+
     # ==================== operation demo ====================
     print("\n" + DIVIDER)
-    print("【5】graph operation demo (add/remove edge)")
+    print("【6】graph operation demo (add/remove edge)")
     print(DIVIDER)
 
     test_graph = UndirectedGraph(num_vertices=4, use_matrix=False)

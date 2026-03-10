@@ -1,8 +1,8 @@
-from Data_Structure.adjancencyMethod.AdjacencyMatrix import AdjacencyMatrixGraph
-from Data_Structure.adjancencyMethod.AdjacencyListGraph import AdjacencyListGraph
-from Data_Structure.GraphType.GraphType import GraphType
+from dataStructure.adjancencyMethod.adjacencyMatrix import AdjacencyMatrixGraph
+from dataStructure.adjancencyMethod.adjacencyListGraph import AdjacencyListGraph
+from dataStructure.graphType.GraphType import GraphType
 from typing import List, Tuple
-from Data_Structure.Edge import Edge
+from dataStructure.edge import Edge
 class DirectedGraph:
     """
     This is about directed graph implementation
@@ -15,6 +15,10 @@ class DirectedGraph:
             self.graph = AdjacencyMatrixGraph(num_vertices, GraphType.DIRECTED)
         else:
             self.graph = AdjacencyListGraph(num_vertices, GraphType.DIRECTED)
+
+    def add_vertex(self) -> int:
+        """add a new vertex and return its index"""
+        return self.graph.add_vertex()
 
     def add_edge(self, from_v: int, to_v: int, weight: float = 1.0) -> None:
         """add directed edge"""
