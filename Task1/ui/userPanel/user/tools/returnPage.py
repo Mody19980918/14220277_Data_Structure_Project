@@ -5,14 +5,15 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QWidget,
     QTableWidget,
-    QHeaderView
+    QHeaderView,
+    QAbstractItemView
 )
 
 class ReturnPage(QWidget):
     def __init__(self):
         super().__init__()
         self.build_return_page()
-    
+
     def build_return_page(self) -> QWidget:
         self.return_page = QFrame()
         self.return_page.setObjectName("card")
@@ -24,13 +25,13 @@ class ReturnPage(QWidget):
         main_layout.addWidget(self.return_page)
         main_layout.setContentsMargins(0, 0, 0, 0)
         return self.return_page
-    
+
     def init_return_title(self) -> None:
         self.return_title = QLabel("Return Books")
         self.return_title.setObjectName("title")
         self.return_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.return_layout.addWidget(self.return_title)
-    
+
     def init_return_table(self) -> None:
         self.return_table = QTableWidget(0, 3)
         self.return_table.setHorizontalHeaderLabels(["Due Date", "Book", "Action"])
@@ -40,4 +41,6 @@ class ReturnPage(QWidget):
         self.return_header.setStretchLastSection(True)
         self.return_table.setColumnWidth(0, 170)
         self.return_table.setColumnWidth(1, 400)
+        # Disable editing
+        self.return_table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.return_layout.addWidget(self.return_table)

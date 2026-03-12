@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
 
-from store import book_store, category_store, loan_store
+from store import bookStore as book_store
+from store import categoryStore as category_store
+from store import loanStore as loan_store
 from models.book import Book
 from models.loan import Loan
 from service.authError import BorrowError, ReturnError

@@ -1,6 +1,6 @@
 import bcrypt
 
-from store import user_store
+from store import userStore as user_store
 from models.user import User
 from service.authError import AuthError
 

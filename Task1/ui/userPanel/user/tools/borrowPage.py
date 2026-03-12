@@ -6,7 +6,8 @@ from PySide6.QtWidgets import (
     QWidget,
     QComboBox,
     QTableWidget,
-    QHeaderView
+    QHeaderView,
+    QAbstractItemView
 )
 
 class BorrowPage(QWidget):
@@ -33,13 +34,13 @@ class BorrowPage(QWidget):
         self.borrow_title.setObjectName("title")
         self.borrow_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.borrow_layout.addWidget(self.borrow_title)
-    
+
     def init_category_combo(self) -> None:
         self.category_combo = QComboBox()
         if self.on_category_changed:
             self.category_combo.currentTextChanged.connect(self.on_category_changed)
         self.borrow_layout.addWidget(self.category_combo)
-    
+
     def init_borrow_table(self) -> None:
         self.borrow_table = QTableWidget(0, 3)
         self.borrow_table.setHorizontalHeaderLabels(["Category", "Book", "Action"])
@@ -49,4 +50,6 @@ class BorrowPage(QWidget):
         self.borrow_header.setStretchLastSection(True)
         self.borrow_table.setColumnWidth(0, 140)
         self.borrow_table.setColumnWidth(1, 430)
+        # Disable editing
+        self.borrow_table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.borrow_layout.addWidget(self.borrow_table)
