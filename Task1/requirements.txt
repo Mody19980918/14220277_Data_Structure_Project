@@ -1,0 +1,12 @@
+# Task 1 - Library Management System Requirements
+# Python 3.10+
+
+# GUI Framework
+PySide6>=6.4.0
+
+# Data Processing & Visualization
+pandas>=1.5.0
+plotly>=5.10.0
+
+# Password Hashing
+bcrypt>=4.0.0

@@ -14,8 +14,8 @@ from PySide6.QtWidgets import (
     QAbstractItemView
 )
 from PySide6.QtCore import Qt
-
-class PayPage(QWidget):
+from ui.userPanel.admin.tools.abstractPage import AbstractPage
+class PayPage(AbstractPage):
     def __init__(self, on_refresh=None) -> None:
         super().__init__()
         self.on_refresh = on_refresh
@@ -94,7 +94,7 @@ class PayPage(QWidget):
         count = int(result["count"])
         amount = float(result["amount"])
         self.fine_result_label.setText("")
-        self._set_pay_result_row(result["username"], str(count), f"{amount:.2f}")
+        self.set_pay_result_row(result["username"], str(count), f"{amount:.2f}")
         self.pay_result_table.setVisible(True)
         self.confirm_paid_button.setVisible(count > 0 and amount > 0)
 

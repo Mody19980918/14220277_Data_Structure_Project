@@ -148,7 +148,7 @@ def main():
 
     # ==================== add vertex demo ====================
     print("\n" + DIVIDER)
-    print("【5】add vertex demo (add vertex dynamically)")
+    print("【5】add vertex (adjacency list and adjacency matrix)")
     print(DIVIDER)
 
     # demo for adjacency list
@@ -197,7 +197,7 @@ def main():
 
     # ==================== operation demo ====================
     print("\n" + DIVIDER)
-    print("【6】graph operation demo (add/remove edge)")
+    print("【6】add / remove edge Demo")
     print(DIVIDER)
 
     test_graph = UndirectedGraph(num_vertices=4, use_matrix=False)

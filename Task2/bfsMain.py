@@ -7,7 +7,7 @@ def print_step_comparison(bfs_result: SearchResult, dfs_result: SearchResult):
     Compare each step of BFS and DFS side by side
     """
     print("\n" + "="*100)
-    print("                    BFS vs DFS 步驟比較")
+    print("                    Compare BFS vs DFS Steps")
     print("="*100)
     
     max_steps = max(len(bfs_result.steps), len(dfs_result.steps))
@@ -118,12 +118,12 @@ def main():
     
     print("""
     BFS Core Concept:
-    ┌─────────────────────────────────────────────────────────────────┐
-    │  1. Use Queue (FIFO - First In First Out)                          │
-    │  2. Visit the start vertex first, then visit all neighbors (distance 1)│
-    │  3. Then visit the neighbors of the neighbors (distance 2), layer by layer expansion│
-    │  4. Like a ripple from the center向外擴散                                      │
-    └─────────────────────────────────────────────────────────────────┘
+    ┌──────────────────────────────────────────────────────────────────────────────────────┐
+    │  1. Use Queue (FIFO - First In First Out)                                            │
+    │  2. Visit the start vertex first, then visit all neighbors (distance 1)              │ 
+    │  3. Then visit the neighbors of the neighbors (distance 2), layer by layer expansion │
+    │  4. Like a ripple from the center                                                    │
+    └──────────────────────────────────────────────────────────────────────────────────────┘
     
     Big O Analysis:
     • Time Complexity: O(V + E) - Each vertex and edge is visited at most once
@@ -135,7 +135,7 @@ def main():
     
     # ==================== DFS Demo ====================
     print("\n" + "="*100)
-    print("                    【DFS Depth-First Search Detailed Demo】")
+    print("                    【DFS Depth-First Search Detailed Demo (For reference only)】")
     print("="*100)
     
     print("""

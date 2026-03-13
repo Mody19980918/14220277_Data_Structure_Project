@@ -4,15 +4,15 @@ from PySide6.QtWidgets import (
     QLabel,
     QSizePolicy,
     QVBoxLayout,
-    QWidget,
 )
 
 try:
     from PySide6.QtWebEngineWidgets import QWebEngineView
 except ImportError:
     QWebEngineView = None
+from ui.userPanel.admin.tools.abstractPage import AbstractPage
 
-class HomePage(QWidget):
+class HomePage(AbstractPage):
     def __init__(self) -> None:
         super().__init__()
         self.init_home_page()
