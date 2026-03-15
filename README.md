@@ -32,7 +32,20 @@ The system is divided into two main parts: an **Admin Panel** and a **User Panel
   - If a user has outstanding fines, they are not allowed to borrow new books.
   - The user must contact an admin to clear the fines before returning books and borrowing again.
 
+### Instruction : 
+- Please go to task 1, install the library first:
+```
+pip install -r requirement
+```
+- after that, please will this command to open the project
+```
+python main.py
+```
 ---
+
+### Login Account :
+1. Admin : username : test_admin, password : 12345678
+2. User : username : 1234, password : 12345678
 
 ## Task 2 – Graph Data Structure & BFS Algorithm
 
@@ -68,3 +81,10 @@ BFS also will be compared with **Depth‑First Search (DFS)**:
 
 - DFS explores as deep as possible along each branch using a **stack** (or recursion), while BFS explores breadth‑wise using a queue.
 - The report contrasts how the choice of stack vs. queue changes the traversal order and applications of the algorithms.
+
+### Instruction
+please go to Task2 folder, please input each command to see the data structure graph and algorithm breadth-first search
+```
+python graphMain.py
+python bfsMain.py
+```

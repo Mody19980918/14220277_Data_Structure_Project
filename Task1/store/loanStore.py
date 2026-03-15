@@ -8,6 +8,9 @@ DELIMITER = "!=!=!"
 
 
 def list_loans() -> list[Loan]:
+    """
+    List all loans in the library
+    """
     loans: list[Loan] = []
     try:
         with open(loan_file_path(), "r", encoding="utf-8") as file:
@@ -38,6 +41,9 @@ def list_loans() -> list[Loan]:
 
 
 def append_loan(loan: Loan) -> None:
+    """
+    Append a loan to the library
+    """
     is_returned = "True" if loan.is_returned else "False"
     with open(loan_file_path(), "a", encoding="utf-8") as file:
         file.write(
@@ -46,6 +52,9 @@ def append_loan(loan: Loan) -> None:
 
 
 def overwrite_loans(loans: Iterable[Loan]) -> None:
+    """
+    Overwrite the loans in the library
+    """
     with open(loan_file_path(), "w", encoding="utf-8") as file:
         for loan in loans:
             is_returned = "True" if loan.is_returned else "False"

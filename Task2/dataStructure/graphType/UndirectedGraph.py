@@ -20,6 +20,10 @@ class UndirectedGraph:
         """add a new vertex and return its index"""
         return self.graph.add_vertex()
 
+    def remove_vertex(self, vertex: int) -> None:
+        """remove a vertex and all its connected edges"""
+        self.graph.remove_vertex(vertex)
+
     def add_edge(self, u: int, v: int, weight: float = 1.0) -> None:
         """add undirected edge"""
         self.graph.add_edge(u, v, weight)

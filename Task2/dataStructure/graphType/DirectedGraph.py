@@ -20,6 +20,10 @@ class DirectedGraph:
         """add a new vertex and return its index"""
         return self.graph.add_vertex()
 
+    def remove_vertex(self, vertex: int) -> None:
+        """remove a vertex and all its connected edges"""
+        self.graph.remove_vertex(vertex)
+
     def add_edge(self, from_v: int, to_v: int, weight: float = 1.0) -> None:
         """add directed edge"""
         self.graph.add_edge(from_v, to_v, weight)

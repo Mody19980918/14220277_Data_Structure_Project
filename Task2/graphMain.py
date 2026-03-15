@@ -146,9 +146,9 @@ def main():
     print(f"  edge (1 -> 0) exists? {directed_matrix.has_edge(1, 0)}")
     print(f"  vertex 3 neighbors: {directed_matrix.get_neighbors(3)}")
 
-    # ==================== add vertex demo ====================
+    # ==================== add / remove vertex demo ====================
     print("\n" + DIVIDER)
-    print("【5】add vertex (adjacency list and adjacency matrix)")
+    print("【5】add / remove vertex (adjacency list and adjacency matrix)")
     print(DIVIDER)
 
     # demo for adjacency list
@@ -175,6 +175,13 @@ def main():
     dynamic_graph_list.display()
     print(f"\nnow total vertices: {dynamic_graph_list.num_vertices}")
 
+    # remove a vertex
+    print("\n--- remove vertex demo ---")
+    print("removing vertex 1 (and all its connected edges)...")
+    dynamic_graph_list.remove_vertex(1)
+    dynamic_graph_list.display()
+    print(f"\nnow total vertices: {dynamic_graph_list.num_vertices}")
+
     # demo for adjacency matrix
     print("\n" + "-" * 40)
     print("adjacency matrix version:")
@@ -192,6 +199,13 @@ def main():
     dynamic_graph_matrix.add_edge(0, new_vertex_3)
 
     print("\nafter adding new vertex and edge:")
+    dynamic_graph_matrix.display()
+    print(f"\nnow total vertices: {dynamic_graph_matrix.num_vertices}")
+
+    # remove a vertex
+    print("\n--- remove vertex demo ---")
+    print("removing vertex 1 (and all its connected edges)...")
+    dynamic_graph_matrix.remove_vertex(1)
     dynamic_graph_matrix.display()
     print(f"\nnow total vertices: {dynamic_graph_matrix.num_vertices}")
 

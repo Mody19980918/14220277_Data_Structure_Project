@@ -36,6 +36,20 @@ class AdjacencyMatrixGraph(GraphADT):
         self.num_vertices += 1
         return new_vertex_id
 
+    def remove_vertex(self, vertex: int) -> None:
+        """remove a vertex and all its connected edges"""
+        self.validate_vertex(vertex)
+
+        # remove the row for this vertex
+        self.matrix.pop(vertex)
+
+        # remove the column for this vertex from all remaining rows
+        for row in self.matrix:
+            row.pop(vertex)
+
+        # decrement num_vertices
+        self.num_vertices -= 1
+
     def add_edge(self, u: int, v: int, weight: float = 1.0) -> None:
         """add edge to adjacency matrix"""
         self.validate_vertex(u)

@@ -34,6 +34,47 @@ class AdjacencyListGraph(GraphADT):
         self.num_vertices += 1
         return new_vertex_id
 
+    def remove_vertex(self, vertex: int) -> None:
+        """remove a vertex and all its connected edges"""
+        self.validate_vertex(vertex)
+
+        # remove all edges from this vertex
+        self.adjacency_list[vertex] = []
+
+        # remove all edges pointing to this vertex from other vertices
+        for u in range(self.num_vertices):
+            if u != vertex:
+                self.adjacency_list[u] = [
+                    (neighbor, weight) for neighbor, weight in self.adjacency_list[u]
+                    if neighbor != vertex
+                ]
+
+        # mark vertex as removed by setting its list to None
+        self.adjacency_list[vertex] = None
+
+        # decrement num_vertices
+        self.num_vertices -= 1
+
+        # rebuild adjacency list with new vertex indices
+        new_adjacency_list = {}
+        new_index = 0
+        index_mapping = {}
+
+        for old_index in range(self.num_vertices + 1):
+            if self.adjacency_list[old_index] is not None:
+                index_mapping[old_index] = new_index
+                new_adjacency_list[new_index] = self.adjacency_list[old_index]
+                new_index += 1
+
+        # update neighbor indices
+        for u in new_adjacency_list:
+            new_neighbors = []
+            for neighbor, weight in new_adjacency_list[u]:
+                new_neighbors.append((index_mapping[neighbor], weight))
+            new_adjacency_list[u] = new_neighbors
+
+        self.adjacency_list = new_adjacency_list
+
     def add_edge(self, u: int, v: int, weight: float = 1.0) -> None:
         """add edge to adjacency list"""
         self.validate_vertex(u)

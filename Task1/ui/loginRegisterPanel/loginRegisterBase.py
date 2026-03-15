@@ -5,16 +5,25 @@ from PySide6.QtWidgets import QFrame, QHBoxLayout, QLabel, QStyle, QVBoxLayout, 
 class LoginRegisterBase(QWidget):
 
     def __init__(self, title: str) -> None:
+        """
+        Initialize the login register base for login and register page to inherit
+        """
         super().__init__()
         self.build_common_ui(title)
 
     def build_common_ui(self, title: str) -> None:
+        """
+        Build the common UI for login and register page
+        """
         self.init_card()
         self.init_root()
         self.init_icon()
         self.init_title(title)
 
     def init_root(self):
+        """
+        Initialize the root layout
+        """
         root_layout = QVBoxLayout(self)
         root_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
         root_layout.setContentsMargins(24, 24, 24, 24)
@@ -28,6 +37,9 @@ class LoginRegisterBase(QWidget):
         self.card_layout.addWidget(title_label)
 
     def init_card(self):
+        """
+        Initialize the card
+        """
         card = QFrame()
         card.setObjectName("card")
         card.setMinimumWidth(740)
@@ -39,6 +51,9 @@ class LoginRegisterBase(QWidget):
         self.card_layout = card_layout
 
     def init_icon(self):
+        """
+        Initialize the icon
+        """
         icon_row = QHBoxLayout()
         icon_row.setAlignment(Qt.AlignmentFlag.AlignCenter)
         for icon_type in (

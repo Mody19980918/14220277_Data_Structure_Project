@@ -6,7 +6,13 @@ from service.authError import AuthError
 
 
 class AuthService:
+    """
+    Auth service
+    """
     def register_user(self, username: str, password: str, role: str = "user") -> User:
+        """
+        Register a new user with username, password and role
+        """
         clean_username = username.strip()
         if not clean_username:
             raise AuthError("Username cannot be blank.")
@@ -21,6 +27,9 @@ class AuthService:
         return created_user
 
     def login(self, username: str, password: str) -> User:
+        """
+        Login a user with username and password
+        """
         clean_username = username.strip()
         users = user_store.list_users()
         user = self.find_user(users, clean_username)
@@ -37,6 +46,9 @@ class AuthService:
     def create_user(
         self, clean_username: str, password: str, role: str = "user"
     ) -> User:
+        """
+        Create a new user with username, password 
+        """
         password_hash = bcrypt.hashpw(
             password.encode("utf-8"), bcrypt.gensalt()
         ).decode("utf-8")
@@ -49,6 +61,9 @@ class AuthService:
         return created_user
 
     def find_user(self, user: list[User], clean_username: str) -> User:
+        """
+        Find a user with username in the  user data base
+        """
         users = user_store.list_users()
         for user in users:
             if user.username == clean_username:

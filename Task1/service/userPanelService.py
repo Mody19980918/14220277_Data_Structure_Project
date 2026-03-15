@@ -12,6 +12,9 @@ import plotly.express as px
 
 class UserPanelService:
     def home_summary(self, username: str) -> dict[str, object]:
+        """
+        Get the home summary with borrowed books, expired books, borrowed this month and borrowed this week
+        """
         borrowed = self.list_borrowed_books(username)
         expired = self.list_expired_books(username)
         total_borrowed, borrowed_this_month, borrowed_this_week = (
@@ -29,15 +32,24 @@ class UserPanelService:
         }
 
     def list_categories(self) -> list[str]:
+        """
+        List all categories in the library
+        """
         return category_store.list_categories()
 
     def list_available_books(self, category_id: str) -> list[Book]:
+        """
+        List all available books in the library
+        """
         books = book_store.list_books()
         return [
             book for book in books if book.category == category_id and book.quantity > 0
         ]
 
     def list_borrowed_books(self, user_id: str) -> list[Loan]:
+        """
+        List all borrowed books for the user
+        """
         return [
             loan
             for loan in loan_store.list_loans()
@@ -45,6 +57,9 @@ class UserPanelService:
         ]
 
     def borrowing_activity_counts(self, user_id: str) -> tuple[int, int, int]:
+        """
+        Get the borrowing activity counts for the user
+        """
         user_loans = [loan for loan in loan_store.list_loans() if loan.username == user_id]
         total_borrowed = len(user_loans)
 
@@ -67,6 +82,9 @@ class UserPanelService:
         return total_borrowed, borrowed_this_month, borrowed_this_week
 
     def list_expired_books(self, user_id: str) -> list[Loan]:
+        """
+        List all expired books for the user
+        """
         today = datetime.now().date()
         expired: list[Loan] = []
         for loan in self.list_borrowed_books(user_id):
@@ -81,7 +99,6 @@ class UserPanelService:
     def daily_user_chart_html(self, user_id: str) -> str | None:
         """
         Return an HTML fragment with a Plotly chart showing the user's borrowing trend.
-        Returns None if pandas/plotly not available or no data.
         """
         loans = [loan for loan in loan_store.list_loans() if loan.username == user_id]
         if not loans:
@@ -131,6 +148,9 @@ class UserPanelService:
         return fig.to_html(include_plotlyjs="cdn", full_html=False)
 
     def borrow_book(self, user_id: str, book_id: str) -> None:
+        """
+        Borrow a book for the user with user id and book id
+        """
         borrowed = self.list_borrowed_books(user_id)
         if len(borrowed) >= 3:
             raise BorrowError("You can borrow up to 3 books at the same time.")
@@ -158,6 +178,9 @@ class UserPanelService:
         )
 
     def return_book(self, user_id: str, book_id: str) -> None:
+        """
+        Return a book for the user with user id and book id
+        """
         loans = loan_store.list_loans()
         current_time = datetime.now().date()
         target_index = next(

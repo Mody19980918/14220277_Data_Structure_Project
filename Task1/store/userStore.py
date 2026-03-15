@@ -8,6 +8,9 @@ DELIMITER = "!=!=!"
 
 
 def list_users() -> list[User]:
+    """
+    List all users in the library
+    """
     users: list[User] = []
     path = user_file_path()
     if not path:
@@ -32,11 +35,17 @@ def list_users() -> list[User]:
 
 
 def append_user(user: User) -> None:
+    """
+    Append a user to the library
+    """
     with open(user_file_path(), "a", encoding="utf-8") as file:
         file.write(f"{user.username}{DELIMITER}{user.password_hash}{DELIMITER}{user.role}\n")
 
 
 def overwrite_users(users: Iterable[User]) -> None:
+    """
+    Overwrite the users in the library
+    """
     with open(user_file_path(), "w", encoding="utf-8") as file:
         for user in users:
             file.write(f"{user.username}{DELIMITER}{user.password_hash}{DELIMITER}{user.role}\n")

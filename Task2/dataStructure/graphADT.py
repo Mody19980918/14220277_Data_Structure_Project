@@ -15,6 +15,11 @@ class GraphADT(ABC):
         pass
 
     @abstractmethod
+    def remove_vertex(self, vertex: int) -> None:
+        """remove a vertex and all its connected edges"""
+        pass
+
+    @abstractmethod
     def add_edge(self, u: int, v: int, weight: float = 1.0) -> None:
         """add edge between u and v"""
         pass

@@ -12,9 +12,15 @@ from models.book import Book
 from models.paymentRecord import PaymentRecord
 
 class AdminPanelService:
+    """
+    Admin panel service
+    """
     FINE_PER_BOOK = 5.0
 
     def today_statistics(self) -> dict[str, int | float]:
+        """
+        Get the today statistics with rented today and user need to pay
+        """
         today = datetime.now().date()
         loans = loan_store.list_loans()
 
@@ -23,7 +29,7 @@ class AdminPanelService:
         unpaid_expired_count = 0
 
         for loan in loans: 
-            due_date = self._parse_date(loan.due_date)
+            due_date = self.parse_date(loan.due_date)
             if due_date:
                 borrowed_day = due_date - timedelta(days=30)
                 if borrowed_day == today:
@@ -39,6 +45,9 @@ class AdminPanelService:
         }
 
     def find_user_fines(self, username: str) -> dict[str, int | float | str | bool]:
+        """
+        Find the user fines
+        """
         clean_username = username.strip()
         if not clean_username:
             return {"username": "", "count": 0, "amount": 0.0, "found": False}
@@ -56,7 +65,7 @@ class AdminPanelService:
         loans = loan_store.list_loans()
         overdue_count = 0
         for loan in loans:
-            due_date = self._parse_date(loan.due_date)
+            due_date = self.parse_date(loan.due_date)
             if (
                 loan.username == clean_username
                 and due_date
@@ -73,6 +82,9 @@ class AdminPanelService:
         }
 
     def mark_fines_as_paid(self, user_id: str) -> int:
+        """
+        Mark the fines as paid for the user
+        """
         clean_user_id = user_id.strip()
         if not clean_user_id:
             return 0
@@ -82,7 +94,7 @@ class AdminPanelService:
         updated_count = 0
         total_paid = 0.0
         for loan in loans:
-            due_date = self._parse_date(loan.due_date)
+            due_date = self.parse_date(loan.due_date)
             if (
                 loan.username == clean_user_id
                 and due_date
@@ -104,6 +116,9 @@ class AdminPanelService:
         return updated_count
 
     def add_book(self, category: str, book_name: str, quantity: int) -> Book:
+        """
+        Add a book in the library
+        """
         clean_category = category.strip()
         clean_book_name = book_name.strip()
         if not clean_category:
@@ -129,15 +144,27 @@ class AdminPanelService:
         return created
 
     def list_categories(self) -> list[str]:
+        """
+        List all categories in the library
+        """
         return category_store.list_categories()
 
     def list_book_names(self) -> list[str]:
+        """
+        List all book names in the library
+        """
         return [book.name for book in book_store.list_books()]
 
     def list_books_by_category(self, category: str) -> list[Book]:
+        """
+        List all books by category
+        """
         return [book for book in book_store.list_books() if book.category == category]
 
     def list_deletable_usernames(self) -> list[str]:
+        """
+        List all deletable usernames
+        """
         return [user.username for user in user_store.list_users() if user.role != "admin"]
 
     def add_category(self, category: str) -> str:
@@ -151,6 +178,9 @@ class AdminPanelService:
         return clean_category
 
     def delete_book(self, book_name: str) -> str:
+        """
+        Delete a book from the library
+        """
         clean_book_name = book_name.strip()
         if not clean_book_name:
             raise ValueError("Book name cannot be blank.")
@@ -170,6 +200,9 @@ class AdminPanelService:
         return clean_book_name
 
     def delete_category(self, category: str) -> str:
+        """
+        Delete a category from the library
+        """
         clean_category = category.strip()
         if not clean_category:
             raise ValueError("Category cannot be blank.")
@@ -187,6 +220,9 @@ class AdminPanelService:
         return clean_category
 
     def delete_user_account(self, username: str) -> str:
+        """
+        Delete a user account from the library
+        """
         clean_username = username.strip()
         if not clean_username:
             raise ValueError("Username cannot be blank.")
@@ -211,7 +247,9 @@ class AdminPanelService:
         return clean_username
 
     def daily_trend_chart(self) -> str | None:
-
+        """
+        Generate a daily trend chart with borrowed books, unreturned students and total charges for admin to see
+        """
         loans = loan_store.list_loans()
         today = datetime.now().date()
 
@@ -226,7 +264,7 @@ class AdminPanelService:
             }
 
         for loan in loans:
-            due_date = self._parse_date(loan.due_date)
+            due_date = self.parse_date(loan.due_date)
             if not due_date:
                 continue
             borrowed_day = (due_date - timedelta(days=30)).isoformat()
@@ -282,7 +320,10 @@ class AdminPanelService:
         )
         return fig.to_html(include_plotlyjs="cdn", full_html=False)
 
-    def _parse_date(self, raw_date: str) -> date | None:
+    def parse_date(self, raw_date: str) -> date | None:
+        """
+        Parse the date string to date object
+        """
         try:
             return datetime.strptime(raw_date, "%Y-%m-%d").date()
         except ValueError:

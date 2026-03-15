@@ -8,6 +8,9 @@ DELIMITER = "!=!=!"
 
 
 def list_books() -> list[Book]:
+    """
+    List all books in the library
+    """
     books: list[Book] = []
     try:
         with open(book_file_path(), "r", encoding="utf-8") as file:
@@ -29,11 +32,17 @@ def list_books() -> list[Book]:
 
 
 def overwrite_books(books: Iterable[Book]) -> None:
+    """
+    Overwrite the books in the library
+    """
     with open(book_file_path(), "w", encoding="utf-8") as file:
         for book in books:
             file.write(f"{book.category}{DELIMITER}{book.name}{DELIMITER}{book.quantity}\n")
 
 
 def append_book(book: Book) -> None:
+    """
+    Append a book to the library
+    """
     with open(book_file_path(), "a", encoding="utf-8") as file:
         file.write(f"{book.category}{DELIMITER}{book.name}{DELIMITER}{book.quantity}\n")
