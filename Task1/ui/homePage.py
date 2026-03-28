@@ -10,6 +10,10 @@ from ui.userPanel.admin.adminPanel import AdminPanel
 
 class HomePage(QMainWindow):
     def __init__(self) -> None:
+        """
+        Initialize the home page.
+        Include services, pages and stack.
+        """
         super().__init__()
         self.setWindowTitle("Library Management System")
         self.resize(980, 640)
@@ -21,11 +25,17 @@ class HomePage(QMainWindow):
         self.show_login()
 
     def init_service(self):
+        """
+        Initialize the auth, user and admin services.
+        """
         self.auth_service = AuthService()
         self.user_service = UserPanelService()
         self.admin_service = AdminPanelService()
 
     def init_page(self):
+        """
+        Initialize the login and register pages.
+        """
         self.login_page = LoginPage(
             auth_service=self.auth_service,
             open_register=self.show_register,
@@ -37,19 +47,31 @@ class HomePage(QMainWindow):
         )
 
     def init_stack(self):
+        """
+        Initialize the stacked widget.
+        """
         self.stack = QStackedWidget()
         self.stack.setObjectName("appRoot")
         self.setCentralWidget(self.stack)
         self.stack.addWidget(self.login_page)
         self.stack.addWidget(self.register_page)
 
-    def show_login(self) -> None:
+    def show_login(self) -> None:   
+        """
+        Show the login page.
+        """
         self.stack.setCurrentWidget(self.login_page)
 
     def show_register(self) -> None:
+        """
+        Show the register page.
+        """
         self.stack.setCurrentWidget(self.register_page)
 
     def show_user_panel(self, user: User) -> None:
+        """
+        Show the user panel.
+        """
         if user.role == "admin":
             self.show_admin_panel(user.username)
             return
@@ -65,6 +87,9 @@ class HomePage(QMainWindow):
         self.stack.setCurrentWidget(self.user_panel)
 
     def show_admin_panel(self, username: str) -> None:
+        """
+        Show the admin panel.
+        """
         if self.admin_panel is not None:
             self.stack.removeWidget(self.admin_panel)
             self.admin_panel.deleteLater()

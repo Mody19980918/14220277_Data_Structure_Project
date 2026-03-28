@@ -18,6 +18,10 @@ class HomePage(QWidget):
         self.build_home_page()
 
     def build_home_page(self) -> QWidget:
+        """
+        Build the home page.
+        Include home page, home layout, home title, stats labels, home data table and warning label.
+        """
         self.home_page = QFrame()
         self.home_page.setObjectName("card")
         self.home_layout = QVBoxLayout(self.home_page)
@@ -34,18 +38,27 @@ class HomePage(QWidget):
         return self.home_page
 
     def init_home_title(self) -> None:
+        """
+        Initialize the home title.
+        """
         self.home_title = QLabel("User Dashboard")
         self.home_title.setObjectName("dashboardTitle")
         self.home_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.home_layout.addWidget(self.home_title)
 
     def init_stats_labels(self) -> None:
+        """
+        Initialize the stats labels.
+        """
         self.stats_label = QLabel("Loading stats...")
         self.stats_label.setObjectName("statsLabel")
         self.stats_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.home_layout.addWidget(self.stats_label)
 
     def init_home_data_table(self) -> None:     # Chart view similar to admin Daily Trend
+        """
+        Initialize the home data table.
+        """
         if QWebEngineView is not None:
             self.chart_view = QWebEngineView()
             self.chart_view.setMinimumHeight(320)
@@ -62,6 +75,9 @@ class HomePage(QWidget):
         self.home_layout.addWidget(self.chart_notice_label)
     
     def init_warning_label(self) -> None:
+        """
+        Initialize the warning label.
+        """
         self.warning_label = QLabel()
         self.warning_label.setObjectName("dashboardSummary")
         self.warning_label.setAlignment(Qt.AlignmentFlag.AlignCenter)

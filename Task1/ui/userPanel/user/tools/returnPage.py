@@ -15,6 +15,10 @@ class ReturnPage(QWidget):
         self.build_return_page()
 
     def build_return_page(self) -> QWidget:
+        """
+        Build the return page.
+        Include return page, return layout, return title and return table.
+        """
         self.return_page = QFrame()
         self.return_page.setObjectName("card")
         self.return_layout = QVBoxLayout(self.return_page)
@@ -27,12 +31,18 @@ class ReturnPage(QWidget):
         return self.return_page
 
     def init_return_title(self) -> None:
+        """
+        Initialize the return title.
+        """
         self.return_title = QLabel("Return Books")
         self.return_title.setObjectName("title")
         self.return_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.return_layout.addWidget(self.return_title)
 
     def init_return_table(self) -> None:
+        """
+        Initialize the return table.
+        """
         self.return_table = QTableWidget(0, 3)
         self.return_table.setHorizontalHeaderLabels(["Due Date", "Book", "Action"])
         self.return_table.verticalHeader().setVisible(False)
@@ -41,6 +51,5 @@ class ReturnPage(QWidget):
         self.return_header.setStretchLastSection(True)
         self.return_table.setColumnWidth(0, 170)
         self.return_table.setColumnWidth(1, 400)
-        # Disable editing
         self.return_table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.return_layout.addWidget(self.return_table)

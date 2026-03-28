@@ -10,7 +10,8 @@ from service.authError import AuthError
 class RegisterPage(LoginRegisterBase):
     def __init__(self, auth_service: AuthService, back_to_login: Callable[[], None]) -> None:
         """
-        Initialize the register page
+        Initialize the register page.
+        Include auth service, back to login, username input, password input, button layout, register button and login button.
         """
         super().__init__("Create Account")
         self.auth_service = auth_service

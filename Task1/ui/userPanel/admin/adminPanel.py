@@ -26,6 +26,10 @@ from ui.userPanel.admin.commonFunction import CommonFunction
 
 class AdminPanel(QWidget):
     def __init__(self, username: str, admin_service: AdminPanelService, on_logout) -> None:
+        """
+        Initialize the admin panel.
+        Include username, admin service, on logout, common function, menu, home page, pay page, add book page, add category page, delete book page, delete category page and delete user page.
+        """
         super().__init__()
         self.username = username
         self.admin_service = admin_service
@@ -57,6 +61,10 @@ class AdminPanel(QWidget):
         self.refresh_all()
 
     def build_ui(self) -> None:
+        """
+        Build the UI for the admin panel.
+        Include layout, nav card, hello label, buttons and pages.
+        """
         self.init_layout()
         self.init_nav_card()
         self.init_hello_label()
@@ -66,11 +74,17 @@ class AdminPanel(QWidget):
         self.layout.addWidget(self.pages, 4)
 
     def init_layout(self) -> None:
+        """
+        Initialize the layout for the admin panel.
+        """
         self.layout = QHBoxLayout(self)
         self.layout.setContentsMargins(12, 12, 12, 12)
         self.layout.setSpacing(12)
     
     def init_nav_card(self) -> None:
+        """
+        Initialize the nav card for the admin panel.
+        """
         self.nav_card = QFrame()
         self.nav_card.setObjectName("card")
         self.nav_layout = QVBoxLayout(self.nav_card)
@@ -78,12 +92,18 @@ class AdminPanel(QWidget):
         self.nav_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
     
     def init_hello_label(self) -> None:
+        """
+        Initialize the hello label for the admin panel.
+        """
         self.hello_label = QLabel(f"Admin, {self.username}")
         self.hello_label.setObjectName("greeting")
         self.hello_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.nav_layout.addWidget(self.hello_label)
     
     def init_buttons(self) -> None:
+        """
+        Initialize the buttons for the admin panel.
+        """
         for text, index, icon_type in self.menu:
             button = QPushButton(text)
             button.setProperty("variant", "ghost")
@@ -99,6 +119,9 @@ class AdminPanel(QWidget):
         self.nav_layout.addWidget(self.logout_btn)
 
     def init_pages(self) -> None:
+        """
+        Initialize the pages for the admin panel.
+        """
         self.pages = QStackedWidget()
         self.pages.addWidget(self.home_page)
         self.pages.addWidget(self.pay_page)
@@ -109,6 +132,9 @@ class AdminPanel(QWidget):
         self.pages.addWidget(self.delete_user_page)
 
     def switch_page(self, index: int) -> None:
+        """
+        Switch the page for the admin panel.
+        """
         self.pages.setCurrentIndex(index)
         if index == 0:
             self.refresh_daily_trend()
@@ -120,6 +146,9 @@ class AdminPanel(QWidget):
             self.reset_delete_user_search()
 
     def refresh_all(self) -> None:
+        """
+        Refresh all the pages for the admin panel.
+        """
         self.refresh_daily_trend()
         self.refresh_categories()
         self.refresh_delete_book_categories()
@@ -130,6 +159,9 @@ class AdminPanel(QWidget):
         self.pay_page.fine_result_label.setText("No result yet.")
 
     def refresh_daily_trend(self) -> None:
+        """
+        Refresh the daily trend for the admin panel.
+        """
         chart_html = self.admin_service.daily_trend_chart()
         chart_view = getattr(self.home_page, 'chart_view', None)
         chart_notice_label = getattr(self.home_page, 'chart_notice_label', None)
@@ -148,12 +180,18 @@ class AdminPanel(QWidget):
             )
 
     def refresh_categories(self) -> None:
+        """
+        Refresh the categories for the admin panel.
+        """
         categories = self.admin_service.list_categories()
         self.add_book_page.add_category_select.clear()
         self.add_book_page.add_category_select.addItems(categories)
         self.refresh_delete_categories_table()
 
     def refresh_delete_book_categories(self) -> None:
+        """
+        Refresh the delete book categories for the admin panel.
+        """
         categories = self.admin_service.list_categories()
         self.delete_book_page.delete_book_category_select.blockSignals(True)
         self.delete_book_page.delete_book_category_select.clear()
@@ -165,6 +203,9 @@ class AdminPanel(QWidget):
             self.delete_book_page.delete_book_table.setRowCount(0)
 
     def refresh_delete_books_for_category(self, category: str) -> None:
+        """
+        Refresh the delete books for category for the admin panel.
+        """
         books = self.admin_service.list_books_by_category(category)
         self.delete_book_page.delete_book_table.setRowCount(len(books))
         for row, book in enumerate(books):
@@ -179,6 +220,9 @@ class AdminPanel(QWidget):
             )
 
     def refresh_delete_categories_table(self) -> None:
+        """
+        Refresh the delete categories table for the admin panel.
+        """
         categories = self.admin_service.list_categories()
         self.delete_category_page.delete_category_table.setRowCount(len(categories))
         for row, category in enumerate(categories):
@@ -193,6 +237,9 @@ class AdminPanel(QWidget):
             )
 
     def reset_delete_user_search(self) -> None:
+        """
+        Reset the delete user search for the admin panel.
+        """
         self.delete_user_page.delete_user_result_label.setText("No result yet.")
         self.delete_user_page.delete_user_table.setVisible(False)
         self.delete_user_page.delete_user_button.setVisible(False)

@@ -4,6 +4,10 @@ from PySide6.QtCore import Qt
 class CommonFunction:
 
     def confirm_action(self, parent: QWidget, title: str, message: str) -> bool:
+        """
+        Confirm the action.
+        Include parent, title and message.
+        """
         dialog = QMessageBox(parent)
         dialog.setIcon(QMessageBox.Icon.Warning)
         dialog.setWindowTitle(title)
@@ -21,6 +25,10 @@ class CommonFunction:
         return dialog.clickedButton() == yes_button
 
     def centered_action_button_cell(self, button: QPushButton) -> QWidget:
+        """
+        Centered the action button cell.
+        Include button.
+        """
         container = QWidget()
         layout = QHBoxLayout(container)
         layout.setContentsMargins(4, 2, 4, 2)

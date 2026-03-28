@@ -7,6 +7,9 @@ from ui.pageStyle import APP_STYLE
 
 
 def main() -> int:
+    """
+    Main function to run the application.
+    """
     page = QApplication(sys.argv)
     page.setStyleSheet(APP_STYLE)
     window = HomePage()
