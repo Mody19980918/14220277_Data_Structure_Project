@@ -10,6 +10,8 @@ This repository contains two tasks for the course project:
 
 - **Task 2 video link**:https://mailouhkedu-my.sharepoint.com/:v:/g/personal/s1422027_live_hkmu_edu_hk/IQD_3m80oiXKQrl88lX1fV0RAcj0vT89sN9Hbs-K_X36z2g?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=EsJ8K8
 
+- **Task 1 admin account**: username : test_admin, password : 12345678
+- **Task 1 user account**: username : 1234, password : 12345678
 ---
 
 ## Task 1 – Library System Application
