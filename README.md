@@ -12,6 +12,15 @@ This repository contains two tasks for the course project:
 
 - **Task 1 admin account**: username : test_admin, password : 12345678
 - **Task 1 user account**: username : 1234, password : 12345678
+
+- **Method of Open Task 1 project**:
+1. First, install python version 3.8.20
+2. run command "pip install -r ./Task1/requirements.txt"
+3. run command "python ./Task1/main.py" and enjoy library system!
+
+- **Method of Open Task2 project**:
+- For New Data Structure, please run command "python ./Task2/graphMain.py"
+- For New Algorithm, please run command "python ./Task2/btsMain.py"
 ---
 
 ## Task 1 – Library System Application
