@@ -25,13 +25,13 @@ class Stack:
            [ 1 ]  <- pushed first
            [ 0 ]  <- visited, popped
     
-    Step 2: Visit 2（top！），neighbor 4 is pushed
+    Step 2: Visit 2 (top!), neighbor 4 is pushed
            top
             ↓
            [ 4 ]  <- pushed last
            [ 1 ]  <- still waiting
     
-    Step 3: Visit 4，no new neighbors, backtrack to 1
+    Step 3: Visit 4, no new neighbors, backtrack to 1
            top
             ↓
            [ 1 ]  <- now processing

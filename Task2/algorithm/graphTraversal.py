@@ -32,7 +32,7 @@ class GraphTraversal:
         - Expand layer by layer, like a ripple spreading outward
         
         【Data Structure Used】
-        - Queue (Queue) - FIFO：Ensure the first discovered vertex is processed first
+        - Queue (Queue) - FIFO: Ensure the first discovered vertex is processed first
         
         【Big O Time Complexity Analysis】
         - Each vertex is visited at most once: O(V)
@@ -113,9 +113,9 @@ class GraphTraversal:
             # record this step
             action_desc = f"Visit vertex {current}"
             if neighbors_added:
-                action_desc += f"，neighbors {neighbors_added} are enqueued"
+                action_desc += f", neighbors {neighbors_added} are enqueued"
             else:
-                action_desc += "，no new neighbors can be enqueued"
+                action_desc += ", no new neighbors can be enqueued"
             
             steps.append(SearchStep(
                 step_number=step_count,
@@ -146,7 +146,7 @@ class GraphTraversal:
         - Repeat until all vertices are visited
         
        【Data Structure Used】
-        - Stack - LIFO：Ensure the last discovered vertex is processed first
+        - Stack - LIFO: Ensure the last discovered vertex is processed first
         
         【Big O Time Complexity Analysis】
         - Each vertex is visited at most once: O(V)
@@ -232,9 +232,9 @@ class GraphTraversal:
             # record this step
             action_desc = f"Visit vertex {current}"
             if neighbors_added:
-                action_desc += f"，neighbors {neighbors_added} are pushed (LIFO)"
+                action_desc += f", neighbors {neighbors_added} are pushed (LIFO)"
             else:
-                action_desc += "，no new neighbors can be pushed, prepare to backtrack"
+                action_desc += ", no new neighbors can be pushed, prepare to backtrack"
             
             steps.append(SearchStep(
                 step_number=step_count,
